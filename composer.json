@@ -3,7 +3,11 @@
   "require": {
     "php": ">=5.3.3",
     "silex/silex": "~1.1",
-    "twig/twig": "1.*"
+    "twig/twig": "1.*",
+    "symfony/twig-bridge": "*",
+    "monolog/monolog": "*",
+    "symfony/monolog-bridge": "*",
+    "symfony/security": "*"
   },
   "minimum-stability": "dev",
   "autoload": {
