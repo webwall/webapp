@@ -1,0 +1,222 @@
+
+// Core variables and mixins
+// Include default bootstrap vars
+@import "bootstrap/variables.less";
+
+// Overwrite defaults here.
+
+// Brand colors
+// -------------------------
+
+@brand-primary:         #428bca;
+@brand-success:         #5cb85c;
+@brand-warning:         #f0ad4e;
+@brand-danger:          #d9534f;
+@brand-info:            #5bc0de;
+
+// Scaffolding
+// -------------------------
+
+@body-bg:               #fff;
+@text-color:            @gray-dark;
+
+// Links
+// -------------------------
+
+@link-color:            @brand-primary;
+@link-hover-color:      darken(@link-color, 15%);
+
+// Typography
+// -------------------------
+
+
+@font-family-base:        @font-family-serif;
+@headings-font-family:    @font-family-sans-serif;
+@font-size-base:          14px;
+@line-height-base:        1.428571429; // 20/14
+
+
+// Iconography
+// -------------------------
+
+@icon-font-path:          "/static/fonts/";
+
+// Basics of a navbar
+@navbar-height:                    50px;
+@navbar-margin-bottom:             @line-height-computed;
+@navbar-border-radius:             @border-radius-base;
+@navbar-padding-horizontal:        floor(@grid-gutter-width / 2);
+@navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
+
+@navbar-default-color:             white;
+@navbar-default-bg:                #f8f8f8;
+@navbar-default-border:            darken(@navbar-default-bg, 6.5%);
+
+// Navbar links
+@navbar-default-link-color:                white;
+@navbar-default-link-hover-color:          #333;
+@navbar-default-link-hover-bg:             transparent;
+@navbar-default-link-active-color:         #555;
+@navbar-default-link-active-bg:            darken(@navbar-default-bg, 6.5%);
+@navbar-default-link-disabled-color:       #ccc;
+@navbar-default-link-disabled-bg:          transparent;
+
+// Navbar brand label
+@navbar-default-brand-color:               white;
+@navbar-default-brand-hover-color:         darken(@navbar-default-brand-color, 10%);
+@navbar-default-brand-hover-bg:            transparent;
+
+
+// Continue bootstrap defaults. Only uncomment what you need.
+@import "bootstrap/mixins.less";
+
+// Reset
+@import "bootstrap/normalize.less";
+@import "bootstrap/print.less";
+
+// Core CSS
+@import "bootstrap/scaffolding.less";
+@import "bootstrap/type.less";
+@import "bootstrap/code.less";
+// @import "bootstrap/grid.less";
+
+@import "bootstrap/tables.less";
+@import "bootstrap/forms.less";
+@import "bootstrap/buttons.less";
+
+// Components: common
+// @import "bootstrap/component-animations.less";
+// @import "bootstrap/input-groups.less";
+// @import "bootstrap/dropdowns.less";
+// @import "bootstrap/list-group.less";
+// @import "bootstrap/panels.less";
+// @import "bootstrap/wells.less";
+// @import "bootstrap/close.less";
+
+// Components: Nav
+// @import "bootstrap/navs.less";
+@import "bootstrap/navbar.less";
+// @import "bootstrap/button-groups.less";
+// @import "bootstrap/breadcrumbs.less";
+// @import "bootstrap/pagination.less";
+@import "bootstrap/pager.less";
+
+// Components: Popovers
+// @import "bootstrap/modals.less";
+// @import "bootstrap/tooltip.less";
+// @import "bootstrap/popovers.less";
+
+// Components: Misc
+// @import "bootstrap/alerts.less";
+// @import "bootstrap/thumbnails.less";
+// @import "bootstrap/media.less";
+// @import "bootstrap/labels.less";
+// @import "bootstrap/badges.less";
+// @import "bootstrap/progress-bars.less";
+// @import "bootstrap/accordion.less";
+// @import "bootstrap/carousel.less";
+// @import "bootstrap/jumbotron.less";
+
+@import "bootstrap/glyphicons.less";
+
+.wrapper {
+  padding-top: 49px;
+  padding-left: 100px;
+}
+
+.sidebar {
+	// position: absolute;
+	// height: 100%;
+  .make-md-column(3);
+  // border-right: 1px solid black;
+  background-color: black;
+}
+
+.sidebar-left-fixed {
+	margin-left: -100px;
+	left: 100px;
+	width: 100px;
+	background: #323843;
+	height: 100%;
+	position: fixed;
+	top: 50px;
+	text-align: center;
+	overflow-y: auto;
+	z-index: 1000;
+	transition: all 0.4s ease 0s;
+}
+
+.page-content {
+	height: 100%;
+	min-height: 100%;
+	width: 100%;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.page-content-left {
+	.make-md-column(9);
+}
+
+.page-content-right {
+	.make-md-column(3);
+}
+
+// Custom navbar
+
+.adminbar {
+	.navbar();
+	.navbar-default();
+	.navbar-fixed-top();
+	#gradient > .vertical(@start-color: #63aef1; @end-color: #225eb6);
+	color: white;
+}
+
+.adminbar .brand {
+	.navbar-brand();
+	.navbar-default > .navbar-brand();
+}
+.adminbar .text {
+	.navbar-text();
+}
+
+// Sidebar Menu
+
+.sidebar-menu {
+	margin-left: 0;
+	list-style: none;
+	padding: 0;
+	margin: 0 0 10px 25px;
+}
+
+.sidebar-menu li {
+	line-height: 20px;
+}
+
+.sidebar-menu li a {
+	color: #999999;
+	padding: 20px 10px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+
+.sidebar-menu span {
+	font-size: 24px;
+}
+
+.sidebar-menu li.active, 
+.sidebar-menu li.active a {
+	color: white;
+	font-weight: 200;
+	#gradient > .radial(@inner-color: #3d4452, @outer-color: #1c2026)
+}
+
+.sidebar-menu li a:hover {
+	color: white;
+	font-weight: 200;
+	#gradient > .radial(@inner-color: #393f4c, @outer-color: #252931);
+}
+// Utility classes
+@import "bootstrap/utilities.less"; // Has to be last to override when necessary
+@import "bootstrap/responsive-utilities.less";

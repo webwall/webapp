@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}Admin Example Application{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/static/css/admin.css" rel="stylesheet" media="screen">
+    <script src="/static/vendor/require.js"></script>
+    <script>
+      require(['static/app'], function(app) {
+        app.init();
+      });
+    </script>
+  </head>
+  <body>
+    <nav class="adminbar" class="">
+      <a class="brand" href="#">New Web Order</a>
+      <p class="text pull-right">Signed in as <a href="#" class="navbar-link">Nik Cubrilovic</a></p>
+    </nav>
+    <div class="wrapper">
+      <div class="sidebar-left-fixed">
+        <ul class="sidebar-menu">
+          <li class="{{ dashboard_active }}">
+            <a href="/admin">
+              <span class="glyphicon glyphicon-th"></span>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="{{ dashboard_active }}">
+            <a href="/admin/posts">
+              <span class="glyphicon glyphicon-align-left"></span>
+              <p>Posts</p>
+            </a>
+          </li>
+          <li class="{{ pages_active }}">
+            <a href="/admin/pages">
+              <span class="glyphicon glyphicon-book"></span>
+              <p>Pages</p>
+            </a>
+          </li>
+          <li class="{{ users_active }}">
+            <a href="/admin/users">
+              <span class="glyphicon glyphicon-user"></span>
+              <p>Users</p>
+            </a>
+          </li>
+          <li class="{{ settings_active }}">
+            <a href="/admin/settings">
+              <span class="glyphicon glyphicon-cog"></span>
+              <p>Settings</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="page-content">
+        {% block content %}
+          <h2 class="page-header">Admin Area</h2>
+          <div class="page-content-left">
+            <p>left</p>
+          </div>
+          <div class="page-content-right">
+            <p>right</p>
+          </div>
+
+        {% endblock %}
+       </div>
+    </div>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

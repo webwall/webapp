@@ -1,0 +1,15 @@
+{
+  "name": "webwall/site",
+  "require": {
+    "php": ">=5.3.3",
+    "silex/silex": "~1.1",
+    "twig/twig": "1.*"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-0": {
+      "Webwall": "src/"
+    }
+  }
+}
+
