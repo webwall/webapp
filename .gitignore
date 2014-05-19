@@ -1,0 +1,6 @@
+var
+composer.lock
+webroot/css/*.css
+webroot/js/*.js
+vendor/*
+.env
