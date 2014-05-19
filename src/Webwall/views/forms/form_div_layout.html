@@ -1,0 +1,57 @@
+{% extends "form_div_layout.html.twig" %}
+
+{% block form_widget_compound %}
+    <ul>
+      <li>one error</li>
+        {% for error in errors %}
+            <li>{{ error.message }}</li>
+        {% endfor %}
+    </ul>
+  {{ form_errors(form) }}
+  {{ block('form_rows') }}
+  {{ form_rest(form) }}
+{% endblock form_widget_compound %}
+
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    <ul>
+        {% for error in errors %}
+            <li>{{ error.message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% block image_row %}
+{% spaceless %}
+<div>
+  {% set baseurl = url('index.index')|default('/') %}
+  {% set type = type|default('image') %}
+  <input type="{{type}}"  {{ block('widget_attributes') }}
+      {% if value is not empty %}
+        value="{{ value }}"
+      {% endif %}
+  src='{{baseurl}}{{attr.src}}' />
+</div>
+{% endspaceless %}
+{% endblock image_row %}
+
+{% block form_row %}
+{% spaceless %}
+    <div class="form-group">
+        {{ form_label(form, label|default(null), { 'label_attr': { 'class': 'control-label' } }) }}
+        <div class="form-input">
+          {% if errors|length > 0 %}
+            {{ form_errors(form) }}
+            {{ form_widget(form, {'attr': {'class': 'form-control error'}}) }}
+          {% else %}
+            {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+          {% endif %}
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock form_row %}
+
+

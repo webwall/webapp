@@ -7,12 +7,20 @@
     "symfony/twig-bridge": "*",
     "monolog/monolog": "*",
     "symfony/monolog-bridge": "*",
-    "symfony/security": "*"
+    "symfony/security": "*",
+    "symfony/form": "*",
+    "symfony/locale":"*",
+    "symfony/validator": "*",
+    "symfony/config": "*",
+    "symfony/translation": "*",
+    "moriony/silex-mongo-provider": "*",
+    "ircmaxell/password-compat": "*"
   },
   "minimum-stability": "dev",
   "autoload": {
     "psr-0": {
-      "Webwall": "src/"
+      "Webwall": "src/",
+      "Truss": "src/"
     }
   }
 }

@@ -9,7 +9,7 @@ build:
 	@echo "Building .. "
 	recess --compile ${SITE_LESS} > ${SITE_CSS}
 	# recess --compile ${SITE_LESS} > ${SITE_CSS}
-	# recess --compile ${ADMIN_LESS} > ${ADMIN_CSS}
+	recess --compile ${ADMIN_LESS} > ${ADMIN_CSS}
 
 site-css: webroot/css/*.css
 

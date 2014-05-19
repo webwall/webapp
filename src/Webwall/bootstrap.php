@@ -30,12 +30,12 @@ if (!isset($_SERVER['DOCUMENT_ROOT'])) {
 
 // ini_set('include_path', PATH_TRUSS . PS . ini_get('include_path'));
 
-define('WEBWALL_DIR_THEME', realpath(WEBWALL_ROOT . '/templates'));
+// define('WEBWALL_DIR_THEME', realpath(WEBWALL_ROOT . '/templates'));
 define('WEBWALL_DIR_VAR', realpath(WEBWALL_ROOT . '/var'));
 
-if(!is_dir(WEBWALL_DIR_THEME)) {
-  die(sprintf("WEBWALL_DIR_THEME invalid (%s)", WEBWALL_DIR_THEME));
-}
+// if(!is_dir(WEBWALL_DIR_THEME)) {
+  // die(sprintf("WEBWALL_DIR_THEME invalid (%s)", WEBWALL_DIR_THEME));
+// }
 
 if(!is_dir(WEBWALL_DIR_VAR) || !is_writable(WEBWALL_DIR_VAR)) {
   die(sprintf("WEBWALL_DIR_VAR invalid (%s)", WEBWALL_DIR_VAR));
@@ -43,5 +43,5 @@ if(!is_dir(WEBWALL_DIR_VAR) || !is_writable(WEBWALL_DIR_VAR)) {
 
 define('WEBWALL_ENV', 'dev');
 
-require WEBWALL_ROOT . '/vendor/autoload.php';
+$loader = require WEBWALL_ROOT . '/vendor/autoload.php';
 require 'app.php';
