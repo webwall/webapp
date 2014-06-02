@@ -16,8 +16,8 @@
     "symfony/validator": "*",
     "symfony/config": "*",
     "symfony/translation": "*",
-    "moriony/silex-mongo-provider": "*",
-    "ircmaxell/password-compat": "*"
+    "ircmaxell/password-compat": "*",
+    "doctrine/dbal": "~2.0"
   },
   "minimum-stability": "dev",
   "autoload": {
