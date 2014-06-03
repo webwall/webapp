@@ -6,26 +6,36 @@ use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\ControllerCollection;
 
-use Webwall\Forms;
+use Symfony\Component\Form\FormError;
 
-class UsersController implements ControllerProviderInterface {
+use Webwall\Forms;
+use Truss\Controllers\BaseController;
+
+class UsersController extends BaseController implements ControllerProviderInterface {
 
   public function dosignup(Application $app) {
     $registrationForm = $app['form.factory']->create(new \Webwall\Forms\Signup(), array("attr" => array("class"=>"test")));
     $registrationForm->handleRequest($app['request']);
+
     if ($registrationForm->isValid()) {
       $data = $registrationForm->getData();
-      $um = $app['user_manager'];
+      $um = $app['um'];
       if($um->email_exists($data['email']) == true) {
         $registrationForm->addError(new FormError('email already exists'));
       }
-      if($um->add_user($data) === true) {
+      if($um->add_user($data) == true) {
         $app['session']->getFlashBag()->add('notice', 'User created.');
         return $app->redirect($app['url_generator']->generate('homepage'));
+      } else {
+        $app['session']->getFlashBag()->add('error', 'Could not add user (database error)');
+        // $registrationForm->addError(new FormError('Could not add user (database error)'));
       }
     }
+
     $app['session']->getFlashBag()->add('error', 'Form contains errors');
-    return $app['twig']->render('signup_form.html', array("registrationForm" => $registrationForm->createView(), 'action' => '/user/signup'));
+    // $registrationForm->addError(new FormError('Form contains errors'));
+    return $this->render('signup_form',  array("registrationForm" => $registrationForm->createView(), 'action' => '/user/signup'));
+    // return $app['twig']->render('signup_form.html', array("registrationForm" => $registrationForm->createView(), 'action' => '/user/signup'));
   }
 
   public function signup(Application $app) {

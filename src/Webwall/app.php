@@ -3,8 +3,11 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Mongo\Silex\Provider\MongoServiceProvider;
+
 use Webwall\Controllers;
 use Webwall\Models\UserManager;
+
+use Truss\Provider\ParisServiceProvider;
 
 define('APP_ROOT', __DIR__);
 
@@ -16,11 +19,23 @@ if(WEBWALL_ENV == 'dev') {
   $app['debug'] = false;
 }
 
+// Dbal
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+  'db.options' => array(
+    'driver'   => 'pdo_mysql',
+    'host'   => '127.0.0.1',
+    'dbname'   => 'webwall',
+    'user'   => 'root',
+    'password'   => '',
+    'charset'   => 'utf8',
+  ),
+));
+
 // Twig
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
   'twig.path' => APP_ROOT . '/views',
   'twig.class_path' => APP_ROOT . '/../vendor/twig/twig/lib',
-  'twig.options' => array('cache' => WEBWALL_DIR_VAR.'/cache'),
+  // 'twig.options' => array('cache' => WEBWALL_DIR_VAR.'/cache'),
   "twig.form.templates"=>array('form_div_layout.html.twig',"forms/form_div_layout.html"),
 ));
 $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
@@ -28,20 +43,9 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
   return $twig;
 }));
 
-// Database
-$app->register(new MongoServiceProvider, array(
-  'mongo.connections' => array(
-    'default' => array(
-      'server' => 'mongodb://127.0.0.1:27017',
-      'options' => array('connect' => true, 'db' => 'webwall')
-      )
-    )
-));
-$app['config.database'] = 'webwall';
 
-
-$app['user_manager'] = $app->share(function(Silex\Application $app) {
-  return new Webwall\Models\UserManager($app);
+$app['um'] = $app->share(function(Silex\Application $app) {
+  return new Webwall\Managers\UserManager($app);
 });
 
 $app->register(new Silex\Provider\TranslationServiceProvider(), array("locale_fallback" => "en"));
@@ -52,8 +56,8 @@ $app->register(new Silex\Provider\ValidatorServiceProvider());
 
 $app->mount("/", new Webwall\Controllers\PagesController());
 $app->mount("/admin", new Webwall\Controllers\AdminController());
-$app->mount("/admin/users", new Webwall\Controllers\AdminUsersController($app['user_manager']));
-$app->mount("/user", new Webwall\Controllers\UsersController($app['user_manager']));
+$app->mount("/admin/users", new Webwall\Controllers\AdminUsersController($app));
+$app->mount("/user", new Webwall\Controllers\UsersController($app));
 
 $app->run();
 
