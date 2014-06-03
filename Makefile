@@ -22,4 +22,7 @@ watch:
 	echo "Watching less files..."; \
 	watchr -e "watch('assets/style/.*\.less') { system 'make build' }"
 
-.PHONY: watch site-css
+dumpdb:
+  mysqldump -u root -p  --compact -d webwall > db/schema.sql
+
+.PHONY: watch site-css dumpdb
