@@ -6,30 +6,28 @@ use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\ControllerCollection;
 
-class PagesController implements ControllerProviderInterface {
+use Truss\Controllers\BaseController;
+
+class PagesController extends BaseController implements ControllerProviderInterface {
 
   public function index(Application $app) {
-    return $app['twig']->render('index.html');
+    return $this->render('index');
   }
 
-  public function product(Application $app) {
-    return $app['twig']->render('product.html');
-  }
-
-  public function about(Application $app) {
-    return $app['twig']->render('about.html');
-  }
-
-  public function contact(Application $app) {
-    return $app['twig']->render('contact.html');
+  public function page(Application $app, $slug) {
+    $this->app = $app;
+    $pm = $app['page_manager'];
+    if (($pv = $pm->get_stub($slug)) === false) {
+      return $this->render('404', array());
+    }
+    return $this->render('page', $pv);
   }
 
   public function connect(Application $app) {
+    $this->app = $app;
     $index = $app['controllers_factory'];
-    $index->get('/', 'Webwall\Controllers\PagesController::index')->bind('homepage');
-    $index->get('/product', 'Webwall\Controllers\PagesController::product')->bind('product');
-    $index->get('/about', 'Webwall\Controllers\PagesController::about')->bind('about');
-    $index->get('/contact', 'Webwall\Controllers\PagesController::contact')->bind('contact');
+    $index->get('/', array($this, 'index'))->bind('home');
+    $index->get('/{slug}', array($this, 'page'))->bind('page');
     return $index;
   }
 }

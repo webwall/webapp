@@ -1,0 +1,39 @@
+{% extends "admin/pages/base.html" %}
+
+{% block admintitle %}Page List{% endblock %}
+
+{% block content %}
+  {% if pages is defined %}
+    <table>
+      <thead>
+        <tr>
+          <td>Title</td>
+          <td>Stub</td>
+          <td>Status</td>
+          <td>Pubdate</td>
+        </tr>
+      </thead>
+      <tbody>
+      {% for page in pages %}
+        <tr>
+            <td><a href="/admin/pages/edit/{{ page.id }}">{{ page.title }}</a></td>
+          {% if page.stub is defined %}
+            <td>{{ page.stub }}</td>
+          {% else %}
+            <td></td>
+          {% endif %}
+          {% if page.status is defined %}
+            <td>{{ page.status }}</td>
+          {% else %}
+            <td></td>
+          {% endif %}
+          <td>{{ page.pubdate }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+  no pages.
+  {% endif %}
+{% endblock %}
+
