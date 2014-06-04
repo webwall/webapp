@@ -40,6 +40,17 @@
       </div>
     </div>
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+      <p class="alert-info">
+          {{ flashMessage }}
+      </p>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+      <p class="alert-danger">
+          {{ flashMessage }}
+      </p>
+    {% endfor %}
+
     {% block jumbotron %}{% endblock %}
 
     <div class="container">
@@ -49,7 +60,7 @@
     <div class="footer">
       <div class="container">
         <div class="footer-col">
-          this is the footer
+          &copy; 2014 Webwall.
         </div>
       </div>
     </div>

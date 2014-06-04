@@ -51,6 +51,19 @@
       <div class="page-content">
           <h2 class="page-header">{% block admintitle %}Admin Area{% endblock %}</h2>
           <div class="page-content-left">
+
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+              <p class="alert-info">
+                  {{ flashMessage }}
+              </p>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+              <p class="alert-danger">
+                  {{ flashMessage }}
+              </p>
+            {% endfor %}
+
+
             {% block content %}
             <p>left</p>
             {% endblock %}

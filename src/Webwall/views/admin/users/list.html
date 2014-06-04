@@ -17,17 +17,12 @@
       {% for user in users %}
         <tr>
           {% if user.email is defined %}
-            <td><a href="/admin/users/edit/{{ user._id }}">{{ user.email }}</a></td>
+            <td><a href="/admin/users/edit/{{ user.id }}">{{ user.email }}</a></td>
           {% else %}
             <td></td>
           {% endif %}
           {% if user.firstname is defined %}
-            <td>{{ user.firstname }} {{ user.lastname }}</td>
-          {% else %}
-            <td></td>
-          {% endif %}
-          {% if user.companyname is defined %}
-            <td>{{ user.companyname }}</td>
+            <td>{{ user.firstname }} {{ user.surname }}</td>
           {% else %}
             <td></td>
           {% endif %}
