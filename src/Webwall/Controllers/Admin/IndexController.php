@@ -1,24 +1,12 @@
 <?php
 
-namespace Webwall\Controllers;
+namespace Webwall\Controllers\Admin;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\ControllerCollection;
 
-class AdminController implements ControllerProviderInterface {
-
-  public function highlite_active($active_page) {
-    $pages = array(
-        'dashboard_active' => '',
-        'posts_active' => '',
-        'pages_active' => '',
-        'users_active' => '',
-        'settings_active' => '',
-      );
-    $pages[$active_page . '_active'] = 'active';
-    return $pages;
-  }
+class IndexController extends BaseController implements ControllerProviderInterface {
 
   public function index(Application $app) {
     $ret = array();
