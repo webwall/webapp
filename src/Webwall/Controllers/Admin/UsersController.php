@@ -8,8 +8,6 @@ use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\ControllerCollection;
 
-// use Truss\Controllers\BaseController;
-
 class UsersController extends BaseController implements ControllerProviderInterface {
 
   protected $template_path = "/admin/users/";

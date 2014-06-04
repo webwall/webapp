@@ -6,8 +6,6 @@ use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\ControllerCollection;
 
-use Truss\Controllers\BaseController;
-
 class PagesController extends BaseController implements ControllerProviderInterface {
 
   public function index(Application $app) {

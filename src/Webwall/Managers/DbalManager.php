@@ -1,6 +1,6 @@
 <?php
 
-namespace Truss\Managers;
+namespace Webwall\Managers;
 
 use Silex\Application;
 

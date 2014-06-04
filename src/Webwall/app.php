@@ -7,8 +7,6 @@ use Mongo\Silex\Provider\MongoServiceProvider;
 use Webwall\Controllers;
 use Webwall\Models\UserManager;
 
-use Truss\Provider\ParisServiceProvider;
-
 define('APP_ROOT', __DIR__);
 
 $app = new Silex\Application();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Truss\Controllers;
+namespace Webwall\Controllers;
 
 use \Silex\Application;
 use \Silex\ControllerProviderInterface;

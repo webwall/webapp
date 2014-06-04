@@ -3,7 +3,6 @@
 namespace Webwall\Managers;
 
 use Silex\Application;
-use Truss\Managers\DbalManager;
 
 class PageManager extends DbalManager {
 

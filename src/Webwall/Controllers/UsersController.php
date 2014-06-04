@@ -9,7 +9,6 @@ use Silex\ControllerCollection;
 use Symfony\Component\Form\FormError;
 
 use Webwall\Forms;
-use Truss\Controllers\BaseController;
 
 class UsersController extends BaseController implements ControllerProviderInterface {
 

@@ -22,8 +22,7 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-0": {
-      "Webwall": "src/",
-      "Truss": "src/"
+      "Webwall": "src/"
     }
   }
 }
