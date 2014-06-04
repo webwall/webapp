@@ -26,7 +26,6 @@ class PagesController extends BaseController implements ControllerProviderInterf
     $pageForm->setData($page);
 
     return $this->render('edit', array(
-      'page' => $page,
       'form' => $pageForm->createView(),
       'action' => $app["url_generator"]->generate('admin.pages.edit', array('id'=>$id)))
     );
@@ -38,11 +37,14 @@ class PagesController extends BaseController implements ControllerProviderInterf
 
     if ($pageForm->isValid()) {
       $data = $pageForm->getData();
+
       if(($page = $app['manager.page']->update($data, $id)) == true) {
         $app['session']->getFlashBag()->add('notice', 'Page updated.');
         return $app->redirect($app['url_generator']->generate('admin.pages.ls'));
       }
     }
+
+    $app['session']->getFlashBag()->add('error', 'Form contains errors');
 
     return $this->render('edit', array(
       'form' => $pageForm->createView(),
@@ -70,16 +72,17 @@ class PagesController extends BaseController implements ControllerProviderInterf
       }
     }
 
+    $app['session']->getFlashBag()->add('error', 'Form contains errors');
+
     return $this->render('edit', array(
       'form' => $pageForm->createView(),
       'action' => $app["url_generator"]->generate('admin.pages.create'))
     );
   }
 
-
-
   public function connect(Application $app) {
-    $this->app = $app;
+    parent::connect($app);
+
     $index = $app['controllers_factory'];
     $index->match('/', array($this, 'ls'))->bind('admin.pages.ls');
     $index->get('/edit/{id}', array($this, 'edit'))->bind('admin.pages.edit');
@@ -90,6 +93,7 @@ class PagesController extends BaseController implements ControllerProviderInterf
     // $index->get('/logout', array($this, 'logout'))->bind('user.logout');
     // $index->get('/signup', array($this, 'signup'))->bind('user.signup');
     // $index->post('/signup', array($this, 'dosignup'))->bind('user.dosignup');
+
     return $index;
   }
 

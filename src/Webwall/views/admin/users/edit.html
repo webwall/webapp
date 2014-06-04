@@ -3,13 +3,6 @@
 {% block admintitle %}Edit User > {% endblock %}
 
 {% block content %}
-  {% if user is defined %}
-    {{ user._id }}</br>
-    {{ user.firstname }}</br>
-    {{ user.email }}</br>
-  {% else %}
-  <p>User not found!</p>
-  {% endif %}
 
   <div class="signup-col">
 
@@ -17,7 +10,7 @@
   {{form_widget(form)}}
   <div class="form-group">
     <div class="offset form-input">
-      <button type="submit" class="btn btn-default">Signup</button>
+      <button type="submit" class="btn btn-default">Save</button>
     </div>
   </div>
 </form>
