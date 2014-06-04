@@ -2,32 +2,45 @@
 
 namespace Truss\Controllers;
 
-class BaseController {
+use \Silex\Application;
+use \Silex\ControllerProviderInterface;
+
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+abstract class BaseController implements ControllerProviderInterface {
+
+  protected $app;
 
   protected $template_path = null;
 
-  function __construct(\Silex\Application $app) {
+  public function connect(Application $app) {
     $this->app = $app;
   }
 
-  protected function highlite_active($active_page) {
-    return array();
+  public function highlite_active($active_page=null) {
+    if(!isset($this->page_sections) || !is_array($this->page_sections)) {
+      return array();
+    }
+
+    $section_names = array();
+
+    foreach($this->page_sections as $ps) {
+      $section_names[$ps . '_active'] = '';
+    }
+
+    if($active_page)
+      $pages[$active_page . '_active'] = 'active';
+
+    return $section_names;
   }
 
-  public function not_found() {
-    return 'not found';
-  }
 
   protected function template_append_messages($vars) {
-    // var_dump($vars);
-    // $messages = $this->app['session']->getFlashBag()->get("error");
-    // $vars['error'] = $messages;
-    // var_dump($vars['error']);
-    // var_dump($vars);
+
     return $vars;
   }
 
-  public function render($template, $vars, $active='users') {
+  public function render($template, array $vars = array(), $active=null) {
     $vars = array_merge($vars, $this->highlite_active($active));
 
     $_template_path = '';
@@ -40,10 +53,12 @@ class BaseController {
     }
 
     $vars = $this->template_append_messages($vars);
-    // $vars = array_merge($vars, array('error' => $this->app['session']->getFlashBag()->get('error')));
-    // print '<pre>';
-    // var_dump($vars['error']);
+
     return $this->app['twig']->render($_template_path, $vars);
 
+  }
+
+  public function render_json($vars) {
+    return new JsonResponse($vars);
   }
 }
