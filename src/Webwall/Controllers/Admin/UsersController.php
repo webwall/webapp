@@ -15,29 +15,12 @@ class UsersController extends BaseController implements ControllerProviderInterf
   public function index(Application $app) {
     $ret = array();
     $ret = array_merge($ret, $this->highlite_active('dashboard'));
-    return $app['twig']->render('admin\users\index.html', $ret);
+    return $app['twig']->render('index', $ret);
   }
 
   public function userlist(Application $app) {
-    $users = $app['um']->get_users();
+    $users = $app['manager.user']->get_users();
     return $this->render('list', array('users' => $users));
-  }
-
-  public function userlist_old(Application $app) {
-    $users = $app['paris']->getModel('User')->find_many();
-    $users_output = array();
-    foreach($users as $user) {
-      $u = array(
-          'id' => $user->id,
-          'firstname' => $user->firstname,
-          'surname' => $user->surname,
-          'email' => $user->email
-        );
-      $users_output[] = $u;
-    }
-    // var_dump($users);
-    // $users = array();
-    return $this->render('list', array('users' => $users_output));
   }
 
   public function usernew(Application $app) {

@@ -13,12 +13,12 @@ class PagesController extends BaseController implements ControllerProviderInterf
   protected $template_path = "/admin/pages/";
 
   public function ls(Application $app) {
-    $pages = $app['page_manager']->get_all();
+    $pages = $app['manager.page']->get_all();
     return $this->render('list', array('pages' => $pages));
   }
 
   public function edit(Application $app, $id=null) {
-    $page = $app['page_manager']->get_id($id);
+    $page = $app['manager.page']->get_id($id);
 
     $pageForm = $app['form.factory']->create(new \Webwall\Forms\Page(), $page);
     $pageForm->setData($page);
@@ -36,7 +36,7 @@ class PagesController extends BaseController implements ControllerProviderInterf
 
     if ($pageForm->isValid()) {
       $data = $pageForm->getData();
-      if(($page = $app['page_manager']->update($data, $id)) == true) {
+      if(($page = $app['manager.page']->update($data, $id)) == true) {
         $app['session']->getFlashBag()->add('notice', 'Page updated.');
         return $app->redirect($app['url_generator']->generate('admin.pages.ls'));
       }
@@ -62,7 +62,7 @@ class PagesController extends BaseController implements ControllerProviderInterf
 
     if ($pageForm->isValid()) {
       $data = $pageForm->getData();
-      if(($page = $app['page_manager']->create($data)) == true) {
+      if(($page = $app['manager.page']->create($data)) == true) {
         $app['session']->getFlashBag()->add('notice', 'Page created.');
         return $app->redirect($app['url_generator']->generate('admin.pages.ls'));
       }

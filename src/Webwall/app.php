@@ -44,11 +44,11 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 
 
-$app['um'] = $app->share(function(Silex\Application $app) {
+$app['manager.user'] = $app->share(function(Silex\Application $app) {
   return new Webwall\Managers\UserManager($app);
 });
 
-$app['page_manager'] = $app->share(function(Silex\Application $app) {
+$app['manager.page'] = $app->share(function(Silex\Application $app) {
   return new Webwall\Managers\PageManager($app);
 });
 

@@ -14,7 +14,7 @@ class PagesController extends BaseController implements ControllerProviderInterf
 
   public function page(Application $app, $slug) {
     $this->app = $app;
-    $pm = $app['page_manager'];
+    $pm = $app['manager.page'];
     if (($pv = $pm->get_stub($slug)) === false) {
       return $this->render('404', array());
     }
