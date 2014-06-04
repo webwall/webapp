@@ -12,6 +12,8 @@ class UsersController extends BaseController implements ControllerProviderInterf
 
   protected $template_path = "/admin/users/";
 
+  protected $active_page = 'users';
+
   public function index(Application $app) {
     $ret = array();
     $ret = array_merge($ret, $this->highlite_active('dashboard'));
@@ -82,10 +84,6 @@ class UsersController extends BaseController implements ControllerProviderInterf
     $index->match('/list', array($this, 'userlist'))->bind('admin.users.list');
     $index->get('/new', array($this, 'usernew'))->bind('admin.users.new');
     $index->post('/new', array($this, 'usercreate'))->bind('admin.users.create');
-    // $index->match('/login', array($this, 'login'))->bind('user.login');
-    // $index->get('/logout', array($this, 'logout'))->bind('user.logout');
-    // $index->get('/signup', array($this, 'signup'))->bind('user.signup');
-    // $index->post('/signup', array($this, 'dosignup'))->bind('user.dosignup');
     return $index;
   }
 

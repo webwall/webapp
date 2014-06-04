@@ -12,6 +12,8 @@ class PagesController extends BaseController implements ControllerProviderInterf
 
   protected $template_path = "/admin/pages/";
 
+  protected $active_page = 'pages';
+
   public function ls(Application $app) {
     $pages = $app['manager.page']->get_all();
     return $this->render('list', array('pages' => $pages));

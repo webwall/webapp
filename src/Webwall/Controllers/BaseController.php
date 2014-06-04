@@ -28,8 +28,11 @@ abstract class BaseController implements ControllerProviderInterface {
       $section_names[$ps . '_active'] = '';
     }
 
+    if(isset($this->active_page))
+      $section_names[$this->active_page . '_active'] = 'active';
+
     if($active_page)
-      $pages[$active_page . '_active'] = 'active';
+      $section_names[$active_page . '_active'] = 'active';
 
     return $section_names;
   }
