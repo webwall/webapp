@@ -1,6 +1,6 @@
 <?php
 
-namespace Webwall\Controllers;
+namespace Webwall\Controllers\Admin;
 
 use Webwall\Forms;
 
@@ -8,25 +8,11 @@ use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\ControllerCollection;
 
-use Truss\Controllers\BaseController;
+// use Truss\Controllers\BaseController;
 
-class AdminUsersController extends BaseController implements ControllerProviderInterface {
+class UsersController extends BaseController implements ControllerProviderInterface {
 
   protected $template_path = "/admin/users/";
-
-  protected $page_sections = array('dashboard', 'posts', 'pages', 'users', 'settings');
-
-  public function highlite_active($active_page) {
-    $pages = array(
-        'dashboard_active' => '',
-        'posts_active' => '',
-        'pages_active' => '',
-        'users_active' => '',
-        'settings_active' => '',
-      );
-    $pages[$active_page . '_active'] = 'active';
-    return $pages;
-  }
 
   public function index(Application $app) {
     $ret = array();

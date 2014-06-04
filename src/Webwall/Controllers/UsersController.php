@@ -64,6 +64,7 @@ class UsersController extends BaseController implements ControllerProviderInterf
     $index->get('/logout', array($this, 'logout'))->bind('user.logout');
     $index->get('/signup', array($this, 'signup'))->bind('user.signup');
     $index->post('/signup', array($this, 'dosignup'))->bind('user.dosignup');
+    parent::connect($app);
     return $index;
   }
 }

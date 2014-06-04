@@ -21,9 +21,9 @@ class Signup extends AbstractType {
         ));
         $builder->add('firstname', "text", array(
             "constraints" => array(new Assert\NotBlank(), new Assert\Length(array('min'=>3, 'max'=>200)))));
-        $builder->add('lastname', "text", array(
+        $builder->add('surname', "text", array(
             "constraints" => array(new Assert\NotBlank(), new Assert\Length(array('min'=>3, 'max'=>200)))));
-        $builder->add('companyname', "text");
+        // $builder->add('companyname', "text");
         $builder->add('website', "text");
 
         $builder->add("agreement", 'checkbox', array('label' => "I agree with the condition of use"));
