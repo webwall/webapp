@@ -1,0 +1,39 @@
+{% extends "admin/posts/base.html" %}
+
+{% block admintitle %}Posts List{% endblock %}
+
+{% block content %}
+  {% if posts is defined %}
+    <table>
+      <thead>
+        <tr>
+          <td>Title</td>
+          <td>Stub</td>
+          <td>Status</td>
+          <td>Pubdate</td>
+        </tr>
+      </thead>
+      <tbody>
+      {% for post in posts %}
+        <tr>
+            <td><a href="/admin/posts/edit/{{ post.id }}">{{ post.title }}</a></td>
+          {% if post.stub is defined %}
+            <td>{{ post.stub }}</td>
+          {% else %}
+            <td></td>
+          {% endif %}
+          {% if post.status is defined %}
+            <td>{{ post.status }}</td>
+          {% else %}
+            <td></td>
+          {% endif %}
+          <td>{{ post.pubdate }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+  no posts.
+  {% endif %}
+{% endblock %}
+

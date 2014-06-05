@@ -1,0 +1,20 @@
+{% extends "admin/pages/base.html" %}
+
+{% block admintitle %}Edit Post > {% endblock %}
+
+{% block content %}
+
+  <div class="signup-col">
+
+<form class="form-horizontal form-signup" action="{{ action }}" method="post">
+  {{form_widget(form)}}
+  <div class="form-group">
+    <div class="offset form-input">
+      <button type="submit" class="btn btn-default">Save</button>
+    </div>
+  </div>
+</form>
+
+
+</div>
+{% endblock %}
