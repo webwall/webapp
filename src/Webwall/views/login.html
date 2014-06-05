@@ -10,31 +10,35 @@
 
 <div class="signup-col">
 
-<form class="form-horizontal form-signup" role="form">
+{% if error %}
+    <p class="alert-info">{{ error.message }}</p>
+{% endif %}
+
+<form class="form-horizontal form-signup" role="form" action="{{ path('user.login') }}" method="post">
   <div class="form-group">
     <label for="inputEmail3" class="control-label">Email</label>
     <div class="form-input">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+      <input type="email" class="form-control" id="username" placeholder="Email">
     </div>
   </div>
   <div class="form-group">
     <label for="inputPassword3" class="control-label">Password</label>
     <div class="form-input">
-      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+      <input type="password" class="form-control" id="password" placeholder="Password">
     </div>
   </div>
   <div class="form-group">
     <div class="offset form-input">
       <div class="checkbox">
         <label>
-          <input type="checkbox"> Remember me
+          <input type="checkbox" id="rememberme"> Remember me
         </label>
       </div>
     </div>
   </div>
   <div class="form-group">
     <div class="offset form-input">
-      <button type="submit" class="btn btn-default">Sign in</button>
+      <button type="submit" class="btn btn-default">Login</button>
     </div>
   </div>
 </form>
